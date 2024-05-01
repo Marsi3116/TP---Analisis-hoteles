@@ -71,6 +71,7 @@ table(df$country)
 
 prop.table(table(df$arrival_date_month))
 
+prop.table(table(df$hotel))
 
 #3.PRE-PROCESAR DATOS
 #funcion sin_valor(dataframe) que despliega cuantos valores NA posee cada variable
@@ -210,10 +211,12 @@ write.csv2(df, file = "C:/Users/marsi/OneDrive/Escritorio/CURSOS/CICLO 4/Fundame
 
 #¿Cuántas reservas se realizan por tipo de hotel? o ¿Qué tipo de hotel prefiere la gente?
 table(df$hotel)
-ggplot(df, aes(hotel,fill=hotel)) + geom_bar()+ylab("Numero de reservas") +theme_get()
+ggplot(df, aes(x = "", fill = hotel)) +  
+  geom_bar(width = 1, stat = "count") + 
+  coord_polar(theta = "y") +  
+  labs(title = "Número de Clientes por tipo de Hotel", y = NULL, fill = "Tipo de Hotel") +  
+  theme_void() 
 #Se observa que la gente prefiere City Hotel sobre Resort Hotel, practicamente por el doble
-
-
 
 # ¿Está aumentando la demanda con el tiempo?
 summary(df$arrival_date_year)
@@ -352,6 +355,8 @@ table(df$is_canceled, df$arrival_date_month, df$hotel)
 table(df$customer_type, df$hotel)
 #En ambos hoteles reciben reservas individuales
 
+table(df$is_repeated_guest)  #3.296% del total
+
 #fidelizar clientes que suelen ir a hoteles
 table(df$is_repeated_guest, df$hotel, df$customer_type)
 #La mayoria de clientes que vuelve a reservar en ambos hoteles, son reservas "Transient"
@@ -394,3 +399,25 @@ ggplot(cancel_data, aes(x = Hotel, y = Count, fill = Canceled)) +
 #¿Qué tipo de cliente suele hacer más cancelaciones de reserva?
 table( df$is_canceled,df$hotel, df$customer_type)
 #los Transient-party suelen cancelar mas en ambos hoteles
+
+
+#¿Cuantos dias suelen hospedarse los clientes?
+df$total_stays <- df$stays_in_weekend_nights + df$stays_in_week_nights
+ggplot(df, aes(x = hotel, y = total_stays)) +
+  geom_boxplot() +
+  labs(title = "Comparación de la Duración de las Estancias por Tipo de Hotel",
+       x = "Tipo de Hotel", y = "Total de Noches")
+#Se observa que hay una dispersión y valores atípicos, pero en Resort Hotel 
+#suelen quedarse más dias
+
+#¿En que hotel hay mas dias en la lista de espera?
+ggplot(df, aes(x = hotel, y = days_in_waiting_list)) +
+  geom_boxplot() +
+  labs(title = "Días en Lista de Espera por Tipo de Hotel",
+       x = "Tipo de Hotel", y = "Días en Lista de Espera")
+#Se observa que en City Hotel hay mas dispersion en cuanto a los valores y tambien hay mas días
+#en lista de espera
+table(df$is_canceled, df$hotel, df$days_in_waiting_list)
+#Como se identifica, la larga espera en City Hotel influye en las cancelaciones
+
+
