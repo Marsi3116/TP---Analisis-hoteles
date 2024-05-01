@@ -12,7 +12,7 @@ software.
   - Marsi Valeria Figueroa Larragán (U202220990)
   - Mauricio Eduardo Vera Castellon (U20181H114)
 
-[Base de Datos](https://drive.google.com/file/d/1G0-AKU6Lx5i23a1o62wCPSwBQHg1wls1/view)
+[Base de Datos PDF](https://drive.google.com/file/d/1G0-AKU6Lx5i23a1o62wCPSwBQHg1wls1/view)
 
   # [Dataset](Data)
   # [Code R](Code)
