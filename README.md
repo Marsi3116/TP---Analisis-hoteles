@@ -1,6 +1,6 @@
 # Fundamentos de Data Science 
+**Analisis Hotel booking demand**
 
-**TP Analisis Hotel booking demand**
 
 ## OBJETIVO
 Realizar un análisis exploratorio de un conjunto de datos (EDA), creando visualizaciones,
@@ -14,4 +14,4 @@ software.
 
 [https://drive.google.com/file/d/1G0-AKU6Lx5i23a1o62wCPSwBQHg1wls1/view](url)
 
-  #Dataset 
+  # Dataset 
