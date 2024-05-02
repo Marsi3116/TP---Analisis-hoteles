@@ -420,4 +420,24 @@ ggplot(df, aes(x = hotel, y = days_in_waiting_list)) +
 table(df$is_canceled, df$hotel, df$days_in_waiting_list)
 #Como se identifica, la larga espera en City Hotel influye en las cancelaciones
 
+table(df$is_canceled, df$arrival_date_month, df$hotel)
 
+
+#Cancelaciones de reservas por mes y hotel
+cancel_data <- table(df$is_canceled, df$arrival_date_month, df$hotel)
+
+cancel_data_df <- as.data.frame(cancel_data)
+names(cancel_data_df) <- c("IsCanceled", "Month", "Hotel", "Count")
+
+
+ggplot(cancel_data_df, aes(x = Month, y = Count, fill = IsCanceled)) +
+  geom_bar(stat = "identity", position = "stack") +
+  facet_wrap(~ Hotel) + 
+  scale_fill_manual(values = c("0" = "blue", "1" = "red"), labels = c("No Cancelado", "Cancelado")) +
+  labs(title = "Cancelaciones de Reservas por Mes y Hotel",
+       x = "Mes",
+       y = "Número de Reservas",
+       fill = "Estado de Cancelación") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  
+#Se identifica que la mayoria de cancelaciones se realizan en los meses de mayor demanda
